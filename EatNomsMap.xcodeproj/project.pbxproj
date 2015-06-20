@@ -27,6 +27,7 @@
 		F6EDC6C71B35E6BB00444A2F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F6EDC6C61B35E6BB00444A2F /* libz.dylib */; };
 		F6EDC6C91B35E6CE00444A2F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F6EDC6C81B35E6CE00444A2F /* libsqlite3.dylib */; };
 		F6EDC6CC1B35E91E00444A2F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EDC6CB1B35E91E00444A2F /* HomeViewController.m */; };
+		F6EDC6CF1B35F12200444A2F /* MapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EDC6CE1B35F12200444A2F /* MapsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +44,8 @@
 		F6EDC6861B35E14B00444A2F /* EatNomsMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EatNomsMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6EDC68A1B35E14B00444A2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6EDC68B1B35E14B00444A2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F6EDC68D1B35E14B00444A2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		F6EDC68E1B35E14B00444A2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F6EDC68D1B35E14B00444A2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = EatNomsMap/AppDelegate.h; sourceTree = "<group>"; };
+		F6EDC68E1B35E14B00444A2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = EatNomsMap/AppDelegate.m; sourceTree = "<group>"; };
 		F6EDC6941B35E14B00444A2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F6EDC6961B35E14B00444A2F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F6EDC6991B35E14B00444A2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -66,6 +67,8 @@
 		F6EDC6C81B35E6CE00444A2F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F6EDC6CA1B35E91E00444A2F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		F6EDC6CB1B35E91E00444A2F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		F6EDC6CD1B35F12200444A2F /* MapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapsViewController.h; path = ../MapsViewController.h; sourceTree = "<group>"; };
+		F6EDC6CE1B35F12200444A2F /* MapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapsViewController.m; path = ../MapsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +105,9 @@
 		F6EDC67D1B35E14B00444A2F = {
 			isa = PBXGroup;
 			children = (
-				F6EDC6C81B35E6CE00444A2F /* libsqlite3.dylib */,
-				F6EDC6C61B35E6BB00444A2F /* libz.dylib */,
+				F6EDC68D1B35E14B00444A2F /* AppDelegate.h */,
+				F6EDC68E1B35E14B00444A2F /* AppDelegate.m */,
+				F6EDC6931B35E14B00444A2F /* Main.storyboard */,
 				F6EDC6881B35E14B00444A2F /* EatNomsMap */,
 				F6EDC6A21B35E14B00444A2F /* EatNomsMapTests */,
 				F6EDC6871B35E14B00444A2F /* Products */,
@@ -122,11 +126,10 @@
 		F6EDC6881B35E14B00444A2F /* EatNomsMap */ = {
 			isa = PBXGroup;
 			children = (
-				F6EDC68D1B35E14B00444A2F /* AppDelegate.h */,
-				F6EDC68E1B35E14B00444A2F /* AppDelegate.m */,
 				F6EDC6CA1B35E91E00444A2F /* HomeViewController.h */,
 				F6EDC6CB1B35E91E00444A2F /* HomeViewController.m */,
-				F6EDC6931B35E14B00444A2F /* Main.storyboard */,
+				F6EDC6CD1B35F12200444A2F /* MapsViewController.h */,
+				F6EDC6CE1B35F12200444A2F /* MapsViewController.m */,
 				F6EDC6961B35E14B00444A2F /* Images.xcassets */,
 				F6EDC6B31B35E60B00444A2F /* FrameWorks */,
 				F6EDC6981B35E14B00444A2F /* LaunchScreen.xib */,
@@ -175,6 +178,8 @@
 				F6EDC6B41B35E63500444A2F /* AudioToolbox.framework */,
 				F6EDC6AF1B35E5F600444A2F /* Bolts.framework */,
 				F6EDC6B01B35E5F600444A2F /* Parse.framework */,
+				F6EDC6C61B35E6BB00444A2F /* libz.dylib */,
+				F6EDC6C81B35E6CE00444A2F /* libsqlite3.dylib */,
 			);
 			name = FrameWorks;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				F6EDC68F1B35E14B00444A2F /* AppDelegate.m in Sources */,
 				F6EDC68C1B35E14B00444A2F /* main.m in Sources */,
 				F6EDC6CC1B35E91E00444A2F /* HomeViewController.m in Sources */,
+				F6EDC6CF1B35F12200444A2F /* MapsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +316,7 @@
 				F6EDC6941B35E14B00444A2F /* Base */,
 			);
 			name = Main.storyboard;
+			path = EatNomsMap;
 			sourceTree = "<group>";
 		};
 		F6EDC6981B35E14B00444A2F /* LaunchScreen.xib */ = {
