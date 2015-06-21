@@ -90,34 +90,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SbE-EG-zAt">
-                                <rect key="frame" x="0.0" y="64" width="600" height="394"/>
-                            </mapView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7eZ-PW-Csi">
-                                <rect key="frame" x="16" y="464" width="568" height="128"/>
+                                <rect key="frame" x="6" y="68" width="588" height="128"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0py-ic-WMr">
-                                    <rect key="frame" x="0.0" y="0.0" width="568" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="588" height="128"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Restaurant Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2VT-5b-iC6">
+                                            <rect key="frame" x="8" y="8" width="572" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="szA-Gl-2wx">
+                                            <rect key="frame" x="8" y="90" width="450" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="w0H-zH-yRx">
+                                            <rect key="frame" x="466" y="90" width="114" height="29"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="114" id="gvP-Od-l4V"/>
+                                            </constraints>
+                                            <segments>
+                                                <segment title="Street"/>
+                                                <segment title="Hybrid"/>
+                                            </segments>
+                                        </segmentedControl>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2FA-gN-NuH">
+                                            <rect key="frame" x="8" y="49" width="572" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="w0H-zH-yRx" secondAttribute="bottom" constant="10" id="2Wv-ix-CSI"/>
+                                        <constraint firstAttribute="centerX" secondItem="2FA-gN-NuH" secondAttribute="centerX" id="GLH-TZ-qU4"/>
+                                        <constraint firstItem="2FA-gN-NuH" firstAttribute="leading" secondItem="0py-ic-WMr" secondAttribute="leading" constant="8" id="TSC-mK-RrF"/>
+                                        <constraint firstAttribute="bottom" secondItem="szA-Gl-2wx" secondAttribute="bottom" constant="8" id="XJA-rs-hUO"/>
+                                        <constraint firstItem="2FA-gN-NuH" firstAttribute="top" secondItem="2VT-5b-iC6" secondAttribute="bottom" constant="11" id="bNY-bb-DJg"/>
+                                        <constraint firstItem="2VT-5b-iC6" firstAttribute="leading" secondItem="0py-ic-WMr" secondAttribute="leading" constant="8" id="eqj-0R-ji9"/>
+                                        <constraint firstItem="szA-Gl-2wx" firstAttribute="leading" secondItem="0py-ic-WMr" secondAttribute="leading" constant="8" id="ftL-Bb-NC4"/>
+                                        <constraint firstAttribute="trailing" secondItem="w0H-zH-yRx" secondAttribute="trailing" constant="8" id="oBG-4J-UUl"/>
+                                        <constraint firstItem="2VT-5b-iC6" firstAttribute="top" secondItem="0py-ic-WMr" secondAttribute="top" constant="8" id="pMB-cl-sfR"/>
+                                        <constraint firstItem="w0H-zH-yRx" firstAttribute="top" secondItem="2FA-gN-NuH" secondAttribute="bottom" constant="11" id="pe7-fs-tSe"/>
+                                        <constraint firstAttribute="trailing" secondItem="2FA-gN-NuH" secondAttribute="trailing" constant="8" id="ql0-Ho-9PN"/>
+                                        <constraint firstItem="szA-Gl-2wx" firstAttribute="top" secondItem="2FA-gN-NuH" secondAttribute="bottom" constant="11" id="u9W-Vf-rzu"/>
+                                        <constraint firstAttribute="centerY" secondItem="2FA-gN-NuH" secondAttribute="centerY" id="unR-lV-DiS"/>
+                                        <constraint firstItem="w0H-zH-yRx" firstAttribute="leading" secondItem="szA-Gl-2wx" secondAttribute="trailing" constant="8" id="vkQ-jl-hzT"/>
+                                        <constraint firstAttribute="trailing" secondItem="2VT-5b-iC6" secondAttribute="trailing" constant="8" id="wgl-G7-8Kq"/>
+                                    </constraints>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="fZL-N3-8eo"/>
+                                    <constraint firstAttribute="height" constant="128" id="VDe-Jk-oOb"/>
                                 </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SbE-EG-zAt">
+                                <rect key="frame" x="0.0" y="200" width="600" height="400"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="SbE-EG-zAt" secondAttribute="trailing" id="4ek-ee-a7a"/>
-                            <constraint firstItem="7eZ-PW-Csi" firstAttribute="leading" secondItem="llI-bp-vox" secondAttribute="leading" constant="16" id="9pt-HH-iN0"/>
-                            <constraint firstAttribute="trailing" secondItem="7eZ-PW-Csi" secondAttribute="trailing" constant="16" id="Yo2-8X-6KC"/>
-                            <constraint firstItem="MS9-ox-7Kx" firstAttribute="top" secondItem="7eZ-PW-Csi" secondAttribute="bottom" constant="8" id="bjc-WH-Wg3"/>
-                            <constraint firstItem="SbE-EG-zAt" firstAttribute="top" secondItem="5ab-1K-PTR" secondAttribute="bottom" id="c8q-ZH-fqQ"/>
-                            <constraint firstItem="7eZ-PW-Csi" firstAttribute="top" secondItem="SbE-EG-zAt" secondAttribute="bottom" constant="6" id="eKD-yC-kfF"/>
-                            <constraint firstItem="SbE-EG-zAt" firstAttribute="leading" secondItem="llI-bp-vox" secondAttribute="leading" id="oG5-2H-wHc"/>
+                            <constraint firstItem="7eZ-PW-Csi" firstAttribute="top" secondItem="5ab-1K-PTR" secondAttribute="bottom" constant="4" id="I2E-F8-qsO"/>
+                            <constraint firstAttribute="trailing" secondItem="7eZ-PW-Csi" secondAttribute="trailing" constant="6" id="MmJ-qC-duk"/>
+                            <constraint firstAttribute="trailing" secondItem="SbE-EG-zAt" secondAttribute="trailing" id="dnp-zA-n8m"/>
+                            <constraint firstItem="SbE-EG-zAt" firstAttribute="leading" secondItem="llI-bp-vox" secondAttribute="leading" id="fD6-W9-Upt"/>
+                            <constraint firstItem="7eZ-PW-Csi" firstAttribute="leading" secondItem="llI-bp-vox" secondAttribute="leading" constant="6" id="rQI-6U-DPb"/>
+                            <constraint firstItem="MS9-ox-7Kx" firstAttribute="top" secondItem="SbE-EG-zAt" secondAttribute="bottom" id="sE5-3I-iIn"/>
+                            <constraint firstItem="SbE-EG-zAt" firstAttribute="top" secondItem="7eZ-PW-Csi" secondAttribute="bottom" constant="4" id="zFP-K9-NXK"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addressTextField" destination="2FA-gN-NuH" id="xFa-ia-856"/>
+                        <outlet property="cityTextField" destination="szA-Gl-2wx" id="46z-F5-742"/>
                         <outlet property="mapView" destination="SbE-EG-zAt" id="bn7-d9-d9I"/>
+                        <outlet property="restaurantTextField" destination="2VT-5b-iC6" id="7HT-Mq-u3O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GRD-Wq-UDf" userLabel="First Responder" sceneMemberID="firstResponder"/>

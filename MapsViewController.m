@@ -21,6 +21,12 @@
 @property (strong, nonatomic) CLGeocoder *geoCoder;
 @property (strong, nonatomic) CLPlacemark *placeMark;
 
+
+@property (weak, nonatomic) IBOutlet UITextField *restaurantTextField;
+@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
+@property (weak, nonatomic) IBOutlet UITextField *cityTextField;
+
+
 @end
 
 @implementation MapsViewController
@@ -28,6 +34,9 @@
 @synthesize manager;
 @synthesize geoCoder;
 @synthesize placeMark;
+@synthesize restaurantTextField;
+@synthesize addressTextField;
+@synthesize cityTextField;
 
 - (void)viewDidLoad {
    [super viewDidLoad];
@@ -76,6 +85,12 @@
 
 -(void)handleLongPressGesture:(UIGestureRecognizer*)sender {
    
+   // avoid a drag
+   if(sender.state == UIGestureRecognizerStateChanged){
+     
+      return;
+   }
+   
    // remove the previous pin to replace
   if(sender.state == UIGestureRecognizerStateBegan)
       [mapView removeAnnotations:[mapView annotations]];
@@ -108,10 +123,33 @@
             
             NSLog(@"Lat: %f",locCoord.latitude);
             NSLog(@"Log: %f",locCoord.longitude);
-
-            NSLog(@"%@ %@\n%@ %@\n%@ %@", placeMark.subThoroughfare,placeMark.thoroughfare, placeMark.locality
-                  , placeMark.administrativeArea, placeMark.country, placeMark.postalCode);
             
+            NSString *subThoroughfare = placeMark.subThoroughfare;
+            if(subThoroughfare == nil)
+               subThoroughfare = @"";
+            
+            NSString *thoroughfare = placeMark.thoroughfare;
+            if(thoroughfare == nil)
+               thoroughfare = @"";
+            
+            NSString *locality = placeMark.locality;
+            if(locality == nil)
+               locality = @"";
+            
+            NSString *administrativeArea = placeMark.administrativeArea;
+            if(administrativeArea == nil)
+               administrativeArea = @"";
+            
+            NSString *country = placeMark.country;
+            if(country == nil)
+               country = @"";
+
+            NSString *postalCode = placeMark.postalCode;
+            if(postalCode == nil)
+               postalCode = @"";
+
+            addressTextField.text = [NSString stringWithFormat:@"%@ %@", subThoroughfare, thoroughfare];
+            cityTextField.text = [NSString stringWithFormat:@"%@ %@ %@ %@", locality, administrativeArea, country, postalCode];
 
          }
          else
