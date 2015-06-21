@@ -8,6 +8,7 @@
 
 #import "MapsViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "MapListViewController.h"
 #import "dropPin.h"
 
 
@@ -20,11 +21,14 @@
 @property (strong, nonatomic) CLLocationManager *manager;
 @property (strong, nonatomic) CLGeocoder *geoCoder;
 @property (strong, nonatomic) CLPlacemark *placeMark;
+@property (weak, nonatomic) IBOutlet UIButton *listButton;
+
+@property (strong, nonatomic) MKLocalSearchResponse *topTen;
 
 
-@property (weak, nonatomic) IBOutlet UITextField *restaurantTextField;
-@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
-@property (weak, nonatomic) IBOutlet UITextField *cityTextField;
+@property (weak, nonatomic) IBOutlet UITextField *restNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *restTitleTextField;
+
 
 
 @end
@@ -34,12 +38,16 @@
 @synthesize manager;
 @synthesize geoCoder;
 @synthesize placeMark;
-@synthesize restaurantTextField;
-@synthesize addressTextField;
-@synthesize cityTextField;
+@synthesize restNameTextField;
+@synthesize restTitleTextField;
+@synthesize topTen;
+@synthesize listButton;
+
 
 - (void)viewDidLoad {
    [super viewDidLoad];
+   listButton.enabled=NO;
+   
    if(manager == nil){
       manager = [CLLocationManager new];
    }
@@ -49,7 +57,12 @@
    [manager startUpdatingLocation];
    
    geoCoder = [[CLGeocoder alloc]init];
+   
+   
+
+
 }
+
 
 -(void)viewDidAppear:(BOOL)animated{
    [super viewDidAppear:animated];
@@ -57,6 +70,23 @@
    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
    [self.mapView addGestureRecognizer:longPressGesture];
    
+   
+}
+
+- (IBAction)listClick:(UIButton *)sender {
+   
+ //  [self.navigationController performSegueWithIdentifier:@"MapToList" sender:self];
+   
+}
+
+#pragma mark - Navigation
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+   
+   if ([segue.identifier isEqualToString:@"MapToList"])
+   {
+      MapListViewController *mapListVC = (MapListViewController *)[segue destinationViewController];
+      mapListVC.restList = topTen;
+   }
 }
 
 
@@ -121,35 +151,12 @@
          if(error == nil && [placemarks count]>0){
             placeMark = [placemarks lastObject];
             
-            NSLog(@"Lat: %f",locCoord.latitude);
-            NSLog(@"Log: %f",locCoord.longitude);
+//            NSLog(@"Lat: %f",locCoord.latitude);
+//            NSLog(@"Log: %f",locCoord.longitude);
             
-            NSString *subThoroughfare = placeMark.subThoroughfare;
-            if(subThoroughfare == nil)
-               subThoroughfare = @"";
+            [self doSearchwithLatitude:locCoord.latitude :locCoord.longitude];
+           
             
-            NSString *thoroughfare = placeMark.thoroughfare;
-            if(thoroughfare == nil)
-               thoroughfare = @"";
-            
-            NSString *locality = placeMark.locality;
-            if(locality == nil)
-               locality = @"";
-            
-            NSString *administrativeArea = placeMark.administrativeArea;
-            if(administrativeArea == nil)
-               administrativeArea = @"";
-            
-            NSString *country = placeMark.country;
-            if(country == nil)
-               country = @"";
-
-            NSString *postalCode = placeMark.postalCode;
-            if(postalCode == nil)
-               postalCode = @"";
-
-            addressTextField.text = [NSString stringWithFormat:@"%@ %@", subThoroughfare, thoroughfare];
-            cityTextField.text = [NSString stringWithFormat:@"%@ %@ %@ %@", locality, administrativeArea, country, postalCode];
 
          }
          else
@@ -168,6 +175,44 @@
       [mapView addAnnotation:userLocation]; // will cause user location pin to blink
    }
 }
+
+
+-(void)doSearchwithLatitude:(float)latitude :(float)longitude{
+   NSLog(@"Lat: %f",latitude);
+   NSLog(@"Log: %f",longitude);
+   
+   MKLocalSearchRequest *searchRequest = [[MKLocalSearchRequest alloc] init];
+   [searchRequest setNaturalLanguageQuery:@"Restaurant cafe"];
+   CLLocationCoordinate2D restCenter = CLLocationCoordinate2DMake(latitude, longitude);
+   MKCoordinateRegion restRegion = MKCoordinateRegionMakeWithDistance(restCenter, 200, 200);
+   [searchRequest setRegion:restRegion];
+   
+   MKLocalSearch *localSearch = [[MKLocalSearch alloc] initWithRequest:searchRequest];
+   [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
+      
+      //NSLog(@"res: %@", response);
+      topTen = response;
+      
+      if (!error) {
+         //for (MKMapItem *mapItem in [topTen mapItems]) {
+            //NSLog(@"Name: %@, Placemark title: %@", [mapItem name], [[mapItem placemark] title]);
+           // NSLog(@"Name: %@, MKAnnotation title: %@", [mapItem name], [[mapItem placemark] title]);
+           // NSLog(@"Coordinate: %f %f", [[mapItem placemark] coordinate].latitude, [[mapItem placemark] coordinate].longitude);
+            //}
+          listButton.enabled = YES;
+         
+         
+      } else {
+         NSLog(@"Search Request Error: %@", [error localizedDescription]);
+         listButton.enabled = NO;
+      }
+   }];
+   
+}
+
+
+
+
 
 
 

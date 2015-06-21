@@ -30,6 +30,7 @@
 		F6EDC6CF1B35F12200444A2F /* MapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EDC6CE1B35F12200444A2F /* MapsViewController.m */; };
 		F6EDC6D11B35FF7700444A2F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6EDC6D01B35FF7700444A2F /* MapKit.framework */; };
 		F6EDC6D41B36202900444A2F /* dropPin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EDC6D31B36202900444A2F /* dropPin.m */; };
+		F6EDC6D91B37480A00444A2F /* MapListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EDC6D81B37480A00444A2F /* MapListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		F6EDC6D01B35FF7700444A2F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F6EDC6D21B36202900444A2F /* dropPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dropPin.h; sourceTree = "<group>"; };
 		F6EDC6D31B36202900444A2F /* dropPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dropPin.m; sourceTree = "<group>"; };
+		F6EDC6D71B37480A00444A2F /* MapListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapListViewController.h; path = ../MapListViewController.h; sourceTree = "<group>"; };
+		F6EDC6D81B37480A00444A2F /* MapListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapListViewController.m; path = ../MapListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,12 +136,14 @@
 		F6EDC6881B35E14B00444A2F /* EatNomsMap */ = {
 			isa = PBXGroup;
 			children = (
-				F6EDC6CA1B35E91E00444A2F /* HomeViewController.h */,
-				F6EDC6CB1B35E91E00444A2F /* HomeViewController.m */,
+				F6EDC6D71B37480A00444A2F /* MapListViewController.h */,
+				F6EDC6D81B37480A00444A2F /* MapListViewController.m */,
 				F6EDC6CD1B35F12200444A2F /* MapsViewController.h */,
 				F6EDC6CE1B35F12200444A2F /* MapsViewController.m */,
 				F6EDC6D21B36202900444A2F /* dropPin.h */,
 				F6EDC6D31B36202900444A2F /* dropPin.m */,
+				F6EDC6CA1B35E91E00444A2F /* HomeViewController.h */,
+				F6EDC6CB1B35E91E00444A2F /* HomeViewController.m */,
 				F6EDC6961B35E14B00444A2F /* Images.xcassets */,
 				F6EDC6B31B35E60B00444A2F /* FrameWorks */,
 				F6EDC6981B35E14B00444A2F /* LaunchScreen.xib */,
@@ -294,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6EDC68F1B35E14B00444A2F /* AppDelegate.m in Sources */,
+				F6EDC6D91B37480A00444A2F /* MapListViewController.m in Sources */,
 				F6EDC68C1B35E14B00444A2F /* main.m in Sources */,
 				F6EDC6CC1B35E91E00444A2F /* HomeViewController.m in Sources */,
 				F6EDC6D41B36202900444A2F /* dropPin.m in Sources */,
@@ -501,6 +507,7 @@
 				F6EDC6AB1B35E14B00444A2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F6EDC6AC1B35E14B00444A2F /* Build configuration list for PBXNativeTarget "EatNomsMapTests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +516,7 @@
 				F6EDC6AE1B35E14B00444A2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

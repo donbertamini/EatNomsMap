@@ -9,7 +9,7 @@
 #import "HomeViewController.h"
 #import <Parse/Parse.h>
 
-@interface HomeViewController ()
+@interface HomeViewController ()<UIGestureRecognizerDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *registerNewButton;
 @property (strong, nonatomic) IBOutlet UIButton *logOutButton;
 @property (strong, nonatomic) IBOutlet UIButton *logInButton;
@@ -27,10 +27,19 @@
 
 -(void)viewWillAppear:(BOOL)animated{
    [super viewWillAppear:animated];
+   
+   self.navigationController.interactivePopGestureRecognizer.delegate = self;
+
+   
+   
    [self configureButtons];
 }
 
 
+// stop the view controller from swipe to pop
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+   return NO;
+}
 
 - (IBAction)registerNewClick:(UIButton *)sender {
    
