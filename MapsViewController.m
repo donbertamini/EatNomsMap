@@ -22,13 +22,15 @@
 @property (strong, nonatomic) CLGeocoder *geoCoder;
 @property (strong, nonatomic) CLPlacemark *placeMark;
 @property (weak, nonatomic) IBOutlet UIButton *listButton;
-
-@property (strong, nonatomic) MKLocalSearchResponse *topTen;
-
+@property (strong, nonatomic) NSArray *topTen;
 
 @property (weak, nonatomic) IBOutlet UITextField *restNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *restTitleTextField;
 
+@property (nonatomic, strong) NSString *currentName;
+@property (nonatomic, strong) NSString *currentTitle;
+@property (nonatomic, assign) float currentLatitude;
+@property (nonatomic, assign) float currentLongitude;
 
 
 @end
@@ -42,41 +44,63 @@
 @synthesize restTitleTextField;
 @synthesize topTen;
 @synthesize listButton;
+@synthesize currentName;
+@synthesize currentTitle;
+@synthesize currentLatitude;
+@synthesize currentLongitude;
 
 
+#pragma mark - View Conroller Life Cycle
 - (void)viewDidLoad {
    [super viewDidLoad];
    listButton.enabled=NO;
-   
-   if(manager == nil){
-      manager = [CLLocationManager new];
-   }
-   manager.delegate = self;
-   manager.desiredAccuracy = kCLLocationAccuracyBest;
-   [manager requestWhenInUseAuthorization];
-   [manager startUpdatingLocation];
-   
    geoCoder = [[CLGeocoder alloc]init];
-   
-   
-
-
-}
-
-
--(void)viewDidAppear:(BOOL)animated{
-   [super viewDidAppear:animated];
+   mapView.showsUserLocation=YES;
    
    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
    [self.mapView addGestureRecognizer:longPressGesture];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+   [super viewWillAppear:animated];
    
+   // monica CLLocation *lastLoc = [[CLLocation alloc] initWithLatitude:18.940500 longitude:-99.262535];
+   
+   NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+   float lastRegionDelta = [pref floatForKey:@"lastRegionDelta"];
+   float lastLatitude = [pref floatForKey:@"lastLatitude"];
+   float lastLongitude = [pref floatForKey:@"lastLongitude"];
+   CLLocation *lastLoc = [[CLLocation alloc] initWithLatitude:lastLatitude longitude:lastLongitude];
+   
+   MKCoordinateRegion myRegion = {{0.0,0.0},{0.0,0.0}};
+   myRegion.center.latitude = lastLoc.coordinate.latitude;
+   myRegion.center.longitude = lastLoc.coordinate.longitude;
+   myRegion.span.longitudeDelta = lastRegionDelta;
+   myRegion.span.latitudeDelta = lastRegionDelta;
+   [mapView setRegion:myRegion animated:YES];
    
 }
 
-- (IBAction)listClick:(UIButton *)sender {
+-(void)viewWillDisappear:(BOOL)animated{
+   [super viewWillDisappear:animated];
    
- //  [self.navigationController performSegueWithIdentifier:@"MapToList" sender:self];
-   
+   // save map size and location
+   NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+   if(pref){
+      float lastRegionDelta = mapView.region.span.latitudeDelta;
+      float lastLatitude = mapView.region.center.latitude;
+      float lastLongitude = mapView.region.center.longitude;
+      
+      [pref setFloat:lastRegionDelta forKey:@"lastRegionDelta"];
+      [pref setFloat:lastLatitude forKey:@"lastLatitude"];
+      [pref setFloat:lastLongitude forKey:@"lastLongitude"];
+      [pref synchronize];
+   }
+
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+   [super viewDidAppear:animated];
 }
 
 #pragma mark - Navigation
@@ -90,34 +114,10 @@
 }
 
 
-#pragma mark - CLLocation Manager
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-   NSLog(@"location manager failed: %@", error);
-}
-
-
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-
-   [self.manager stopUpdatingLocation];
-   
-   CLLocation *currentLocation = locations.lastObject;
-   
-   mapView.showsUserLocation=YES;
-   
-   MKCoordinateRegion myRegion = {{0.0,0.0},{0.0,0.0}};
-   myRegion.center.latitude = currentLocation.coordinate.latitude;
-   myRegion.center.longitude = currentLocation.coordinate.longitude;
-   myRegion.span.longitudeDelta = 0.05f;
-   myRegion.span.latitudeDelta = 0.05f;
-   [mapView setRegion:myRegion animated:YES];
-   
-}
-
 -(void)handleLongPressGesture:(UIGestureRecognizer*)sender {
    
    // avoid a drag
    if(sender.state == UIGestureRecognizerStateChanged){
-     
       return;
    }
    
@@ -143,7 +143,7 @@
       
       [ann setCoordinate:locCoord];
       
-     CLLocation *thisLocation = [[CLLocation alloc] initWithLatitude:locCoord.latitude longitude:locCoord.longitude];
+      CLLocation *thisLocation = [[CLLocation alloc] initWithLatitude:locCoord.latitude longitude:locCoord.longitude];
   
       [self.mapView addAnnotation:ann];
       
@@ -151,13 +151,8 @@
          if(error == nil && [placemarks count]>0){
             placeMark = [placemarks lastObject];
             
-//            NSLog(@"Lat: %f",locCoord.latitude);
-//            NSLog(@"Log: %f",locCoord.longitude);
-            
             [self doSearchwithLatitude:locCoord.latitude :locCoord.longitude];
            
-            
-
          }
          else
             NSLog(@"error: %@,", error);
@@ -166,20 +161,8 @@
    }
 }
 
-- (void)removeAllPinsButUserLocation1
-{
-   id userLocation = [mapView userLocation];
-   [mapView removeAnnotations:[mapView annotations]];
-   
-   if ( userLocation != nil ) {
-      [mapView addAnnotation:userLocation]; // will cause user location pin to blink
-   }
-}
-
-
+// fill out the 4 current values
 -(void)doSearchwithLatitude:(float)latitude :(float)longitude{
-   NSLog(@"Lat: %f",latitude);
-   NSLog(@"Log: %f",longitude);
    
    MKLocalSearchRequest *searchRequest = [[MKLocalSearchRequest alloc] init];
    [searchRequest setNaturalLanguageQuery:@"Restaurant cafe"];
@@ -190,21 +173,40 @@
    MKLocalSearch *localSearch = [[MKLocalSearch alloc] initWithRequest:searchRequest];
    [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
       
-      //NSLog(@"res: %@", response);
-      topTen = response;
+      // capture the array of mapItems for a table
+      topTen = [response mapItems];
       
       if (!error) {
-         //for (MKMapItem *mapItem in [topTen mapItems]) {
-            //NSLog(@"Name: %@, Placemark title: %@", [mapItem name], [[mapItem placemark] title]);
-           // NSLog(@"Name: %@, MKAnnotation title: %@", [mapItem name], [[mapItem placemark] title]);
-           // NSLog(@"Coordinate: %f %f", [[mapItem placemark] coordinate].latitude, [[mapItem placemark] coordinate].longitude);
-            //}
-          listButton.enabled = YES;
+//         for (MKMapItem *mapItem in [response mapItems]) {
+//            //NSLog(@"Name: %@, Placemark title: %@", [mapItem name], [[mapItem placemark] title]);
+//            //NSLog(@"Name: %@, MKAnnotation title: %@", [mapItem name], [[mapItem placemark] title]);
+//            //NSLog(@"Coordinate: %f %f", [[mapItem placemark] coordinate].latitude, [[mapItem placemark] coordinate].longitude);
+//         }
+         
+      
+         
+         // grab the first record and populate some current values and 2 text fields
+         MKMapItem *firstItem = [[response mapItems]firstObject];
+         currentName = [firstItem name];
+         restNameTextField.text = currentName;
+         currentTitle = [[firstItem placemark] title];
+         restTitleTextField.text = currentTitle;
+         
+         // current latitude stays exactly where pin dropped but can change if saved from list.
+         currentLatitude =  latitude; //[[firstItem placemark] coordinate].latitude;
+         currentLongitude = longitude;  //[[firstItem placemark] coordinate].longitude;
+         NSLog(@"cl: %f", currentLatitude);
+         NSLog(@"cl: %f", currentLongitude);
+         listButton.enabled = YES;
          
          
       } else {
          NSLog(@"Search Request Error: %@", [error localizedDescription]);
          listButton.enabled = NO;
+         currentName = @"";
+         restNameTextField.text = currentName;
+         currentTitle = @"";
+         restTitleTextField.text = currentTitle;
       }
    }];
    

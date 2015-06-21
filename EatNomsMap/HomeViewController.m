@@ -8,11 +8,14 @@
 
 #import "HomeViewController.h"
 #import <Parse/Parse.h>
+#import <MapKit/MapKit.h>
 
 @interface HomeViewController ()<UIGestureRecognizerDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *registerNewButton;
 @property (strong, nonatomic) IBOutlet UIButton *logOutButton;
 @property (strong, nonatomic) IBOutlet UIButton *logInButton;
+@property (strong, nonatomic) CLLocationManager *manager;
+
 
 @end
 
@@ -23,6 +26,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+   if(_manager == nil){
+      _manager = [CLLocationManager new];
+   }
+   [_manager requestWhenInUseAuthorization];
+  
 }
 
 -(void)viewWillAppear:(BOOL)animated{

@@ -11,6 +11,6 @@
 
 @interface MapListViewController : UIViewController
 
-@property (nonatomic, strong) MKLocalSearchResponse *restList;
+@property (nonatomic, strong) NSArray *restList;
 
 @end

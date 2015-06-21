@@ -20,6 +20,17 @@
    // Override point for customization after application launch.
    
    
+   
+   NSDictionary *userDefaultsDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSNumber numberWithFloat:40.0f], @"lastLatitude",
+                                         [NSNumber numberWithFloat:-100.0f], @"lastLongitude",
+                                         [NSNumber numberWithFloat:50.00f], @"lastRegionDelta",
+                                         nil];
+   
+   
+   [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
+   
+   
    [Parse setApplicationId:@"Z4pStH9Hx0bBkV18vkt4o8wRznPHoWBNe1N8wIbQ"
                  clientKey:@"8eVDmN5iJVa8H8Mb5eyvWnR1JBkIthzVSWY7ve1g"];
    
