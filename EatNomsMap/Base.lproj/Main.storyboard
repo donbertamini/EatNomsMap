@@ -89,8 +89,36 @@
                     <view key="view" contentMode="scaleToFill" id="llI-bp-vox">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SbE-EG-zAt">
+                                <rect key="frame" x="0.0" y="64" width="600" height="394"/>
+                            </mapView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7eZ-PW-Csi">
+                                <rect key="frame" x="16" y="464" width="568" height="128"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0py-ic-WMr">
+                                    <rect key="frame" x="0.0" y="0.0" width="568" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="fZL-N3-8eo"/>
+                                </constraints>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SbE-EG-zAt" secondAttribute="trailing" id="4ek-ee-a7a"/>
+                            <constraint firstItem="7eZ-PW-Csi" firstAttribute="leading" secondItem="llI-bp-vox" secondAttribute="leading" constant="16" id="9pt-HH-iN0"/>
+                            <constraint firstAttribute="trailing" secondItem="7eZ-PW-Csi" secondAttribute="trailing" constant="16" id="Yo2-8X-6KC"/>
+                            <constraint firstItem="MS9-ox-7Kx" firstAttribute="top" secondItem="7eZ-PW-Csi" secondAttribute="bottom" constant="8" id="bjc-WH-Wg3"/>
+                            <constraint firstItem="SbE-EG-zAt" firstAttribute="top" secondItem="5ab-1K-PTR" secondAttribute="bottom" id="c8q-ZH-fqQ"/>
+                            <constraint firstItem="7eZ-PW-Csi" firstAttribute="top" secondItem="SbE-EG-zAt" secondAttribute="bottom" constant="6" id="eKD-yC-kfF"/>
+                            <constraint firstItem="SbE-EG-zAt" firstAttribute="leading" secondItem="llI-bp-vox" secondAttribute="leading" id="oG5-2H-wHc"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="SbE-EG-zAt" id="bn7-d9-d9I"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GRD-Wq-UDf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

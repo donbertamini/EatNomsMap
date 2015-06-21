@@ -28,6 +28,8 @@
 		F6EDC6C91B35E6CE00444A2F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F6EDC6C81B35E6CE00444A2F /* libsqlite3.dylib */; };
 		F6EDC6CC1B35E91E00444A2F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EDC6CB1B35E91E00444A2F /* HomeViewController.m */; };
 		F6EDC6CF1B35F12200444A2F /* MapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EDC6CE1B35F12200444A2F /* MapsViewController.m */; };
+		F6EDC6D11B35FF7700444A2F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6EDC6D01B35FF7700444A2F /* MapKit.framework */; };
+		F6EDC6D41B36202900444A2F /* dropPin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EDC6D31B36202900444A2F /* dropPin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,9 @@
 		F6EDC6CB1B35E91E00444A2F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		F6EDC6CD1B35F12200444A2F /* MapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapsViewController.h; path = ../MapsViewController.h; sourceTree = "<group>"; };
 		F6EDC6CE1B35F12200444A2F /* MapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapsViewController.m; path = ../MapsViewController.m; sourceTree = "<group>"; };
+		F6EDC6D01B35FF7700444A2F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F6EDC6D21B36202900444A2F /* dropPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dropPin.h; sourceTree = "<group>"; };
+		F6EDC6D31B36202900444A2F /* dropPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dropPin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6EDC6D11B35FF7700444A2F /* MapKit.framework in Frameworks */,
 				F6EDC6C91B35E6CE00444A2F /* libsqlite3.dylib in Frameworks */,
 				F6EDC6C71B35E6BB00444A2F /* libz.dylib in Frameworks */,
 				F6EDC6C51B35E6A800444A2F /* SystemConfiguration.framework in Frameworks */,
@@ -105,6 +111,7 @@
 		F6EDC67D1B35E14B00444A2F = {
 			isa = PBXGroup;
 			children = (
+				F6EDC6D01B35FF7700444A2F /* MapKit.framework */,
 				F6EDC68D1B35E14B00444A2F /* AppDelegate.h */,
 				F6EDC68E1B35E14B00444A2F /* AppDelegate.m */,
 				F6EDC6931B35E14B00444A2F /* Main.storyboard */,
@@ -130,6 +137,8 @@
 				F6EDC6CB1B35E91E00444A2F /* HomeViewController.m */,
 				F6EDC6CD1B35F12200444A2F /* MapsViewController.h */,
 				F6EDC6CE1B35F12200444A2F /* MapsViewController.m */,
+				F6EDC6D21B36202900444A2F /* dropPin.h */,
+				F6EDC6D31B36202900444A2F /* dropPin.m */,
 				F6EDC6961B35E14B00444A2F /* Images.xcassets */,
 				F6EDC6B31B35E60B00444A2F /* FrameWorks */,
 				F6EDC6981B35E14B00444A2F /* LaunchScreen.xib */,
@@ -287,6 +296,7 @@
 				F6EDC68F1B35E14B00444A2F /* AppDelegate.m in Sources */,
 				F6EDC68C1B35E14B00444A2F /* main.m in Sources */,
 				F6EDC6CC1B35E91E00444A2F /* HomeViewController.m in Sources */,
+				F6EDC6D41B36202900444A2F /* dropPin.m in Sources */,
 				F6EDC6CF1B35F12200444A2F /* MapsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
